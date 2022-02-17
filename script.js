@@ -9,10 +9,6 @@ function line() {
 }
 
 
-
-
-
-
 function playRound(playerSelection,computerSelection) {
     let shortcutPlayer = playerSelection[0];
     let shortcutComp = computerSelection[0];
