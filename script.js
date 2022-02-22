@@ -11,8 +11,6 @@ function line() {
 
 
 
-
-
 function playRound(playerSelection,computerSelection) {
     let shortcutPlayer = playerSelection[0];
     let shortcutComp = computerSelection[0];
@@ -24,15 +22,21 @@ function playRound(playerSelection,computerSelection) {
 
     switch (result) {
         case "rr":
+            return draw;
         case "pp":
+            return draw;
         case "ss":     
             return draw;
-        case "rs": 
-        case "pr": 
+        case "rs":
+            return win; 
+        case "pr":
+            return win; 
         case "sp":
             return win;
-        case "rp": 
+        case "rp":
+            return lose; 
         case "ps":
+            return lose;
         case "sr":
             return lose;
         default:
@@ -44,11 +48,18 @@ function playRound(playerSelection,computerSelection) {
 function game() {
     console.log("Welcome to rock paper scissors game! Enter your weapon: ");
     line();
-    let play = true;
+
+    let isEnd = true;
+
     let playerInput;
     let playerSelection;
-    let computerSelection = computerPlay();
-    while (play) {
+    
+
+    let playerScore = 0;
+    let computerScore = 0;
+    while (isEnd) {
+        //invalid user check
+        
         let j = true;
         while (j) {
             let playerInput = prompt("Enter your weapon: ").toLowerCase();
@@ -62,43 +73,43 @@ function game() {
             }
             
         }
+        //start game
+        let computerSelection = computerPlay();
 
         let result = playRound(playerSelection,computerSelection);
         switch (result) {
             case "w":
-                console.log("You have WON! You have used " + playerSelection + " against PCs " + computerSelection +".");   
+                console.log("You have WON! You have used " + playerSelection + " against PCs " + computerSelection +"."); 
+                playerScore++;  
+                console.log("player score:" + playerScore);
+                console.log("computer score:" + computerScore);
                 break;
             case "d":
                 console.log("DRAW! You have used " + playerSelection + " against PCs " + computerSelection +".");
+                console.log("player score:" + playerScore);
+                console.log("computer score:" + computerScore);
                 break;
             case "l": 
-                console.log("You have LOST! You have used " + playerSelection + " against PCs " + computerSelection +".")    
+                console.log("You have LOST! You have used " + playerSelection + " against PCs " + computerSelection +"."); 
+                computerScore++;   
+                console.log("player score:" + playerScore);
+                console.log("computer score:" + computerScore);
             default:
                 break;
         }
-        line();
-        
-        let i = true;
-        while (i) {
-            let repeatAnswer = prompt("Do you want to play again?(Y/N): ").toLowerCase();
-            if (repeatAnswer == "n") {
-                play = false;
-                i = false; 
-                line();          
-            }
-            else if(repeatAnswer == "y") {
-                i = false;
-                line();
-            }
-            else {
-                console.log("invalid input! Answer again.")
-                line();
-            }         
+        line();      
+        /*   deciding the winner
+        if (playerScore == 5) {
+            console.log("You have won! Congratulations!");
+            isEnd = false;
         }
-        
-
-        
+        else if(computerScore == 5){
+            console.log("Computer has won! Better luck next time!");
+            isEnd= false;
+        }
+        */
     }
+    
     
 
     
