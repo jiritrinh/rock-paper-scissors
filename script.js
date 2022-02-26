@@ -4,11 +4,6 @@ function computerPlay() {
     let randomNumber = Math.floor(Math.random() * 3);
     return choices[randomNumber];
 }
-function line() {
-    console.log("-------------------------------------------------------");
-}
-
-
 
 
 function playRound(playerSelection,computerSelection) {
@@ -45,6 +40,9 @@ function playRound(playerSelection,computerSelection) {
 
 }
 
+
+
+/*
 function game() {
     console.log("Welcome to rock paper scissors game! Enter your weapon: ");
     line();
@@ -62,7 +60,7 @@ function game() {
         
         let j = true;
         while (j) {
-            let playerInput = prompt("Enter your weapon: ").toLowerCase();
+            let playerInput = btn.textContent;
             playerSelection = playerInput;
             if (playerSelection == "rock" || playerSelection == "paper" || playerSelection == "scissors") {
                 j = false;
@@ -98,7 +96,7 @@ function game() {
                 break;
         }
         line();      
-        /*   deciding the winner
+           
         if (playerScore == 5) {
             console.log("You have won! Congratulations!");
             isEnd = false;
@@ -107,7 +105,7 @@ function game() {
             console.log("Computer has won! Better luck next time!");
             isEnd= false;
         }
-        */
+       
     }
     
     
@@ -116,3 +114,48 @@ function game() {
 }
 
 game();
+*/
+
+const btns = document.querySelectorAll("#btns");
+
+let computerSelection;
+let playerSelection;
+let playerScore = 0;
+let computerScore = 0;
+
+let result ="";
+
+btns.forEach(button => {
+    button.addEventListener("click", () => {
+        computerSelection = computerPlay();
+        playerSelection = button.textContent.toLowerCase();
+
+        result = playRound(playerSelection,computerSelection);
+        switch (result) {
+            case "w":
+                console.log("You have WON! You have used " + playerSelection + " against PCs " + computerSelection +"."); 
+                playerScore++;  
+                console.log("player score:" + playerScore);
+                console.log("computer score:" + computerScore);
+                break;
+            case "d":
+                console.log("DRAW! You have used " + playerSelection + " against PCs " + computerSelection +".");
+                console.log("player score:" + playerScore);
+                console.log("computer score:" + computerScore);
+                break;
+            case "l": 
+                console.log("You have LOST! You have used " + playerSelection + " against PCs " + computerSelection +"."); 
+                computerScore++;   
+                console.log("player score:" + playerScore);
+                console.log("computer score:" + computerScore);
+            default:
+                break;
+        }
+        
+    });
+
+});
+
+
+
+
