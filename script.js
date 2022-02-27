@@ -4,11 +4,6 @@ function computerPlay() {
     let randomNumber = Math.floor(Math.random() * 3);
     return choices[randomNumber];
 }
-function line() {
-    console.log("-------------------------------------------------------");
-}
-
-
 
 
 function playRound(playerSelection,computerSelection) {
@@ -45,75 +40,77 @@ function playRound(playerSelection,computerSelection) {
 
 }
 
-function game() {
-    console.log("Welcome to rock paper scissors game! Enter your weapon: ");
-    line();
+function disableButtons() {
+    btns.forEach(button => {
+        button.disabled = true;
+    })
+}
 
-    let isEnd = true;
 
-    let playerInput;
-    let playerSelection;
-    
 
-    let playerScore = 0;
-    let computerScore = 0;
-    while (isEnd) {
-        //invalid user check
+
+const btns = document.querySelectorAll("#btns");
+let resultShow = document.querySelector("#result-show");
+let playerCounter = document.querySelector("#player-counter");
+let compCounter = document.querySelector("#comp-counter");
+
+
+let computerSelection;
+let playerSelection;
+let playerScore = 0;
+let computerScore = 0;
+
+
+let result ="";
+
+btns.forEach(button => {
+    button.addEventListener("click", () => {
         
-        let j = true;
-        while (j) {
-            let playerInput = prompt("Enter your weapon: ").toLowerCase();
-            playerSelection = playerInput;
-            if (playerSelection == "rock" || playerSelection == "paper" || playerSelection == "scissors") {
-                j = false;
-            }
-            else {
-                console.log("Invalid input!");
-                line();
-            }
-            
-        }
-        //start game
-        let computerSelection = computerPlay();
+        computerSelection = computerPlay();
+        playerSelection = button.textContent.toLowerCase();
 
-        let result = playRound(playerSelection,computerSelection);
+        result = playRound(playerSelection,computerSelection);
         switch (result) {
             case "w":
-                console.log("You have WON! You have used " + playerSelection + " against PCs " + computerSelection +"."); 
+                resultShow.textContent = "You have WON! You have used " + playerSelection + " against PCs " + computerSelection +".";
+                resultShow.style.color = "green";
                 playerScore++;  
-                console.log("player score:" + playerScore);
-                console.log("computer score:" + computerScore);
+                playerCounter.textContent = "PLAYER: " + playerScore;
+                compCounter.textContent = "COMPUTER: " + computerScore;
                 break;
             case "d":
-                console.log("DRAW! You have used " + playerSelection + " against PCs " + computerSelection +".");
-                console.log("player score:" + playerScore);
-                console.log("computer score:" + computerScore);
+                resultShow.textContent = "DRAW! You have used " + playerSelection + " against PCs " + computerSelection +".";
+                resultShow.style.color = "black";
+                playerCounter.textContent = "PLAYER: " + playerScore;
+                compCounter.textContent = "COMPUTER: " + computerScore;
                 break;
-            case "l": 
-                console.log("You have LOST! You have used " + playerSelection + " against PCs " + computerSelection +"."); 
+            case "l":
+                resultShow.textContent = "You have LOST! You have used " + playerSelection + " against PCs " + computerSelection +"."; 
+                resultShow.style.color = "red";
                 computerScore++;   
-                console.log("player score:" + playerScore);
-                console.log("computer score:" + computerScore);
+                playerCounter.textContent = "PLAYER: " + playerScore;
+                compCounter.textContent = "COMPUTER: " + computerScore;
             default:
                 break;
         }
-        line();      
-        /*   deciding the winner
-        if (playerScore == 5) {
-            console.log("You have won! Congratulations!");
-            isEnd = false;
-        }
-        else if(computerScore == 5){
-            console.log("Computer has won! Better luck next time!");
-            isEnd= false;
-        }
-        */
-    }
-    
-    
 
-    
-}
+        if (playerScore == 5 || computerScore == 5) {
+            
+            if (playerScore == 5) {
+                resultShow.textContent = "You have won! Congratulations! Reload to play again";
+                
+            } else {
+                resultShow.textContent = "Computer has won! Better luck next time! Reload to play again";
+            }    
+            disableButtons();
+                                
+        }
 
-game();
+        
+    });
+
+});
+
+
+
 
