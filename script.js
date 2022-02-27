@@ -40,12 +40,12 @@ function playRound(playerSelection,computerSelection) {
 
 }
 
-function reset(playerScore, computerScore) {
-    playerScore = 0;
-    computerScore = 0;
-    resultShow.textContent= "q";
-
+function disableButtons() {
+    btns.forEach(button => {
+        button.disabled = true;
+    })
 }
+
 
 
 
@@ -53,6 +53,7 @@ const btns = document.querySelectorAll("#btns");
 let resultShow = document.querySelector("#result-show");
 let playerCounter = document.querySelector("#player-counter");
 let compCounter = document.querySelector("#comp-counter");
+
 
 let computerSelection;
 let playerSelection;
@@ -72,17 +73,20 @@ btns.forEach(button => {
         switch (result) {
             case "w":
                 resultShow.textContent = "You have WON! You have used " + playerSelection + " against PCs " + computerSelection +".";
+                resultShow.style.color = "green";
                 playerScore++;  
                 playerCounter.textContent = "PLAYER: " + playerScore;
                 compCounter.textContent = "COMPUTER: " + computerScore;
                 break;
             case "d":
                 resultShow.textContent = "DRAW! You have used " + playerSelection + " against PCs " + computerSelection +".";
+                resultShow.style.color = "black";
                 playerCounter.textContent = "PLAYER: " + playerScore;
                 compCounter.textContent = "COMPUTER: " + computerScore;
                 break;
             case "l":
                 resultShow.textContent = "You have LOST! You have used " + playerSelection + " against PCs " + computerSelection +"."; 
+                resultShow.style.color = "red";
                 computerScore++;   
                 playerCounter.textContent = "PLAYER: " + playerScore;
                 compCounter.textContent = "COMPUTER: " + computerScore;
@@ -90,16 +94,18 @@ btns.forEach(button => {
                 break;
         }
 
-        if (playerScore == 5) {
-            resultShow.textContent = "You have won! Congratulations!";
-            playerScore = 0;
-            computerScore = 0;
+        if (playerScore == 5 || computerScore == 5) {
+            
+            if (playerScore == 5) {
+                resultShow.textContent = "You have won! Congratulations! Reload to play again";
+                
+            } else {
+                resultShow.textContent = "Computer has won! Better luck next time! Reload to play again";
+            }    
+            disableButtons();
+                                
         }
-        else if(computerScore == 5){
-            resultShow.textContent = "Computer has won! Better luck next time!";
-            playerScore = 0;
-            computerScore = 0;
-        }
+
         
     });
 
