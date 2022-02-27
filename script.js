@@ -53,6 +53,8 @@ const btns = document.querySelectorAll("#btns");
 let resultShow = document.querySelector("#result-show");
 let playerCounter = document.querySelector("#player-counter");
 let compCounter = document.querySelector("#comp-counter");
+let title = document.querySelector("h1");
+let shyEmoji = document.querySelector("#nude");
 
 
 let computerSelection;
@@ -101,7 +103,9 @@ btns.forEach(button => {
                 
             } else {
                 resultShow.textContent = "Computer has won! Better luck next time! Reload to play again";
-            }    
+            }
+            title.textContent="SENDNEŠ NUDESKY?" 
+            shyEmoji.style.display = "flex";
             disableButtons();
                                 
         }

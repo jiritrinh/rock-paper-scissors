@@ -1,3 +1,8 @@
+#nude {
+    display: none;
+    justify-content: center
+}
+
 body {
     font-family: Calibri;
     background-color:khaki;
@@ -10,6 +15,7 @@ h1 {
 h2 {
     font-size: 35px;
     text-align: center;
+    
 }
 
 #game-panel {
