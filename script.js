@@ -104,9 +104,8 @@ btns.forEach(button => {
             } else {
                 resultShow.textContent = "Computer has won! Better luck next time! Reload to play again";
             }
-            title.textContent="SENDNEŠ NUDESKY?" 
-            shyEmoji.style.display = "flex";
-            disableButtons();
+            
+            
                                 
         }
 
